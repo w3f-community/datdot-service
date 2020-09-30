@@ -1,0 +1,9 @@
+// type=0
+message Message {
+  required string type = 1;
+	required bytes id = 2;
+	optional bytes hash = 3;
+	optional bytes bytes = 4;
+	optional string error = 5;
+}
+

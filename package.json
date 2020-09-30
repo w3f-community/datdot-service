@@ -4,7 +4,8 @@
   "description": "service interact with the substrate chain",
   "main": "index.js",
   "scripts": {
-    "cli": "node cli.js"
+    "cli": "node cli.js",
+    "build-derive-secret": "protocol-buffers ./src/derive-secret/schema.proto -o ./src/derive-secret/message.js"
   },
   "author": "@ninabreznik",
   "license": "MIT",
@@ -32,6 +33,7 @@
     "ndjson": "^1.5.0",
     "p2plex": "^1.3.1",
     "promise-defer": "^1.0.0",
+    "protocol-buffers-encodings": "^1.1.1",
     "random-access-memory": "^3.1.1",
     "sodium-native": "^3.2.0",
     "sodium-universal": "^2.0.0",
@@ -40,6 +42,7 @@
     "youtube-dl": "^3.0.2"
   },
   "devDependencies": {
+    "protocol-buffers": "^4.2.0",
     "ws": "^7.2.1"
   }
 }

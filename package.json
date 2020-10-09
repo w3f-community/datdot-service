@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "protocol-buffers": "^4.2.0",
+    "tape": "^5.0.1",
     "ws": "^7.2.1"
   }
 }

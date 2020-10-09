@@ -4,6 +4,7 @@ message Message {
 	required bytes id = 2;
 	optional bytes hash = 3;
 	optional bytes bytes = 4;
-	optional string error = 5;
+	optional bytes signature = 5;
+	optional string error = 6;
 }
 

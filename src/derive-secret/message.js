@@ -40,6 +40,10 @@ function defineMessage () {
       var len = encodings.bytes.encodingLength(obj.bytes)
       length += 1 + len
     }
+    if (defined(obj.signature)) {
+      var len = encodings.bytes.encodingLength(obj.signature)
+      length += 1 + len
+    }
     if (defined(obj.error)) {
       var len = encodings.string.encodingLength(obj.error)
       length += 1 + len
@@ -69,8 +73,13 @@ function defineMessage () {
       encodings.bytes.encode(obj.bytes, buf, offset)
       offset += encodings.bytes.encode.bytes
     }
-    if (defined(obj.error)) {
+    if (defined(obj.signature)) {
       buf[offset++] = 42
+      encodings.bytes.encode(obj.signature, buf, offset)
+      offset += encodings.bytes.encode.bytes
+    }
+    if (defined(obj.error)) {
+      buf[offset++] = 50
       encodings.string.encode(obj.error, buf, offset)
       offset += encodings.string.encode.bytes
     }
@@ -88,6 +97,7 @@ function defineMessage () {
       id: null,
       hash: null,
       bytes: null,
+      signature: null,
       error: ""
     }
     var found0 = false
@@ -121,6 +131,10 @@ function defineMessage () {
         offset += encodings.bytes.decode.bytes
         break
         case 5:
+        obj.signature = encodings.bytes.decode(buf, offset)
+        offset += encodings.bytes.decode.bytes
+        break
+        case 6:
         obj.error = encodings.string.decode(buf, offset)
         offset += encodings.string.decode.bytes
         break

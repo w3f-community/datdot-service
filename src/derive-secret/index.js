@@ -1,8 +1,8 @@
 const { randomBytes } = require('crypto')
-const { Message } = require('messages')
+const { Message } = require('./message')
 
-module.exports = async function detiveSecret ({
-  numBytes,
+module.exports = async function deriveSecret ({
+  numBytes = 32,
   broadcast,
   listenMessages,
   peers,
@@ -19,7 +19,7 @@ module.exports = async function detiveSecret ({
   const gotHashes = new Map()
   const gotBytes = new Map()
 
-  const [derived] = Promise.all([
+  const [derived] = await Promise.all([
     consumeMessages(),
     run()
   ])
@@ -35,7 +35,8 @@ module.exports = async function detiveSecret ({
   async function consumeMessages () {
     for await (const message of listenMessages()) {
       // Parse out message
-      const { type, ...parsed } = Message.parse(message)
+      const { type, ...parsed } = Message.decode(message)
+      console.log(id, '<-', type, parsed)
       try {
         if (type === 'hash') {
           const { signature, hash, id } = parsed
@@ -95,9 +96,15 @@ module.exports = async function detiveSecret ({
     await broadcast(Message.encode(message))
   }
 
-  async function generateDerived () {}
+  async function generateDerived () {
+    const allBytes = peers.map((id) => gotBytes.get(id.toString('hex')))
+    const concated = Buffer.concat(allBytes)
+    return hashBytes(concated)
+  }
 
-  function hasAllBytes () {}
+  function hasAllBytes () {
+    return peers.every((id) => gotBytes.has(id.toString('hex')))
+  }
 
   async function broadcastHash () {
     const signature = await sign(hash)
@@ -110,7 +117,7 @@ module.exports = async function detiveSecret ({
   }
 
   function hasAllHashes () {
-
+    return peers.every((id) => gotHashes.has(id.toString('hex')))
   }
 
   async function broadcastRandomBytes () {

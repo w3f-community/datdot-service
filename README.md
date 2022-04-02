@@ -1,5 +1,21 @@
 # DatDot
 
+## Building
+
+Clone
+##### `git clone https://github.com/playproject-io/datdot-service.git`
+
+Install dependencies
+##### `npm install`
+
+## Running
+
+To run the scenario, type
+
+##### `npm run simulation 1`
+
+## About
+
 **DatDot** is the infrastructure for running a hosting network for p2p data systems. Think of it as a Filecoin but for Hypercore protocol, built with Substrate.
 
 [Hypercore protocol](https://hypercore-protocol.org/) (started in 2013) is a distributed ledger technology and set of data syncronization primitives with focus on immutable history.
@@ -20,20 +36,6 @@ Due to their P2P nature it's hard to have guarantees about the availability of p
 To read more, visit our [documentation](https://datdot.org/#doc)
 
 Join our [telegram](https://t.me/joinchat/CgTftxXJvp6iYayqDjP7lQ) or follow [@DatDotorg](https://twitter.com/datdotorg) on Twitter for latest updates
-
-## Building
-
-Clone
-##### `git clone https://github.com/playproject-io/datdot-service.git`
-
-Install dependencies
-##### `npm install`
-
-## Running
-
-To run the scenario, type
-
-##### `npm run simulation 1`
 
 ## License
 
